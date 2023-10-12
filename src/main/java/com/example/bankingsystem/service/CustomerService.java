@@ -1,6 +1,8 @@
 package com.example.bankingsystem.service;
 
 import com.example.bankingsystem.converter.CustomerConverter;
+import com.example.bankingsystem.converter.CustomerMapper;
+import com.example.bankingsystem.dto.CustomerSaveRequestDto;
 import com.example.bankingsystem.dto.CustomerDto;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.service.entityservice.CustomerEntityService;
@@ -25,5 +27,12 @@ public class CustomerService {
         List<Customer> customerList = customerEntityService.findAll();
         List<CustomerDto> customerDtoList = customerConverter.converterToCustomerDtoList(customerList);
         return customerDtoList;
+    }
+
+    public CustomerDto save(CustomerSaveRequestDto customerSaveRequestDto) {
+        Customer customer = CustomerMapper.INSTANCE.convertToCustomer(customerSaveRequestDto);
+        customer = customerEntityService.save(customer);
+        CustomerDto customerDto = CustomerMapper.INSTANCE.convertToCustomerDto(customer);
+        return customerDto;
     }
 }

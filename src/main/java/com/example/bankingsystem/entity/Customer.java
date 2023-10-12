@@ -7,8 +7,7 @@ import jakarta.persistence.*;
 public class Customer {
 
     @Id
-    @SequenceGenerator(name = "Customer", sequenceName = "CUSTOMER_ID_SEQ")
-    @GeneratedValue(generator = "Customer")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME", length = 100, nullable = false)

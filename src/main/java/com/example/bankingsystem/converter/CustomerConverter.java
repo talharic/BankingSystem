@@ -16,15 +16,15 @@ public class CustomerConverter {
             CustomerDto customerDto = convertToCustomerDto(customer);
             customerDtoList.add(customerDto);
         }
-        return  customerDtoList;
+        return customerDtoList;
     }
 
     public CustomerDto convertToCustomerDto(Customer customer) {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setId(customer.getId());
-        customerDto.setName(customerDto.getName());
-        customerDto.setSurname(customerDto.getSurname());
-        customerDto.setIdentityNo(customerDto.getIdentityNo());
+        customerDto.setName(customer.getName());
+        customerDto.setSurname(customer.getSurname());
+        customerDto.setIdentityNo(customer.getIdentityNo());
         return customerDto;
     }
 }
