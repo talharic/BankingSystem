@@ -4,7 +4,9 @@ import com.example.bankingsystem.converter.CustomerConverter;
 import com.example.bankingsystem.converter.CustomerMapper;
 import com.example.bankingsystem.dto.CustomerSaveRequestDto;
 import com.example.bankingsystem.dto.CustomerDto;
+import com.example.bankingsystem.dto.CustomerUpdateRequestDto;
 import com.example.bankingsystem.entity.Customer;
+import com.example.bankingsystem.enums.ErrorMessage;
 import com.example.bankingsystem.exception.ItemNotFountException;
 import com.example.bankingsystem.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +54,26 @@ public class CustomerService {
         if (customerOptional.isPresent()) {
             customer = customerOptional.get();
         } else {
-            throw new ItemNotFountException("Customer Not Found");
+            throw new ItemNotFountException(ErrorMessage.CUSTOMER_ERROR_MESSAGE);
         }
         return customer;
+    }
+
+    public CustomerDto update(CustomerUpdateRequestDto customerUpdateRequestDto) {
+        checkIsCustomerExist(customerUpdateRequestDto);
+
+        Customer customer;
+        customer = CustomerMapper.INSTANCE.convertToCustomer(customerUpdateRequestDto);
+        customerRepository.save(customer);
+
+        return CustomerMapper.INSTANCE.convertToCustomerDto(customer);
+    }
+
+    private void checkIsCustomerExist(CustomerUpdateRequestDto customerUpdateRequestDto) {
+        Long id = customerUpdateRequestDto.getId();
+        boolean isExist = customerRepository.existsById(id);
+        if (!isExist) {
+            throw new ItemNotFountException(ErrorMessage.CUSTOMER_ERROR_MESSAGE);
+        }
     }
 }
