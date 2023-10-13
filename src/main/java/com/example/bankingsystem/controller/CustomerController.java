@@ -24,12 +24,24 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity findAll() {
         List<CustomerDto> customerDtoList = customerService.findAll();
-        return new ResponseEntity(customerDtoList, HttpStatus.OK);
+        return ResponseEntity.ok(customerDtoList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id){
+        CustomerDto customerDto = customerService.findById(id);
+        return ResponseEntity.ok(customerDto);
     }
 
     @PostMapping
-    public ResponseEntity sava(@RequestBody CustomerSaveRequestDto customerSaveRequestDto) {
+    public ResponseEntity save(@RequestBody CustomerSaveRequestDto customerSaveRequestDto) {
         CustomerDto customerDto = customerService.save(customerSaveRequestDto);
-        return new ResponseEntity(customerDto, HttpStatus.OK);
+        return ResponseEntity.ok(customerDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        customerService.delete(id);
+        return ResponseEntity.ok(Void.TYPE);
     }
 }
