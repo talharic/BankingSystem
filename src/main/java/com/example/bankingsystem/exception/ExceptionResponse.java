@@ -1,7 +1,5 @@
 package com.example.bankingsystem.exception;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Date;
 
 public class ExceptionResponse {
