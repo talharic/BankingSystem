@@ -54,7 +54,7 @@ public class CustomerService {
         if (customerOptional.isPresent()) {
             customer = customerOptional.get();
         } else {
-            throw new ItemNotFountException(ErrorMessage.CUSTOMER_ERROR_MESSAGE);
+            throw new ItemNotFountException(ErrorMessage.ITEM_ERROR_MESSAGE);
         }
         return customer;
     }
@@ -73,7 +73,7 @@ public class CustomerService {
         Long id = customerUpdateRequestDto.getId();
         boolean isExist = customerRepository.existsById(id);
         if (!isExist) {
-            throw new ItemNotFountException(ErrorMessage.CUSTOMER_ERROR_MESSAGE);
+            throw new ItemNotFountException(ErrorMessage.ITEM_ERROR_MESSAGE);
         }
     }
 }

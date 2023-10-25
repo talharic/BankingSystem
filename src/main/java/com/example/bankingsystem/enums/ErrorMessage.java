@@ -2,7 +2,7 @@ package com.example.bankingsystem.enums;
 
 public enum ErrorMessage {
 
-    CUSTOMER_ERROR_MESSAGE("Customer Not Found"),
+    ITEM_ERROR_MESSAGE("Item Not Found"),
     ;
 
     private String message;
